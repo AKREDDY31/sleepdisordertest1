@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Disorder Prediction and Diagnosis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a2e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #e94560, #0f3460, #16213e, #e94560);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite, pulse 2s infinite;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 300%;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question label {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .options label {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e94560;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #1f4068;
+            transform: scale(1.1);
+        }
+
+        #results {
+            display: none;
+            text-align: center;
+        }
+
+        #results h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        #results p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .suggestions {
+            background-color: #0f3460;
+            padding: 15px;
+            border-radius: 5px;
+            animation: slideUp 2s ease-in-out;
+        }
+
+        #homeButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0f3460;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #homeButton:hover {
+            background-color: #e94560;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sleep Disorder Prediction and Diagnosis</h1>
+    <div class="container" id="questionnaire">
+        <form id="questionForm">
+
+
+            <!-- Questions to be manually added here -->
+
+ <div class="question">
+                <label>1. How many hours do you sleep per night?</label>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="1"> Less than 4 hours</label>
+                    <label><input type="radio" name="q1" value="2"> 4-6 hours</label>
+                    <label><input type="radio" name="q1" value="3"> 6-8 hours</label>
+                    <label><input type="radio" name="q1" value="4"> More than 8 hours</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>2. Do you feel rested after sleeping?</label>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="4"> Always</label>
+                    <label><input type="radio" name="q2" value="3"> Sometimes</label>
+                    <label><input type="radio" name="q2" value="2"> Rarely</label>
+                    <label><input type="radio" name="q2" value="1"> Never</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>3. Do you wake up frequently during sleep?</label>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="1"> Always</label>
+                    <label><input type="radio" name="q3" value="2"> Frequently</label>
+                    <label><input type="radio" name="q3" value="3"> Rarely</label>
+                    <label><input type="radio" name="q3" value="4"> Never</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>4. Do you snore loudly while sleeping?</label>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="1"> Always</label>
+                    <label><input type="radio" name="q4" value="2"> Frequently</label>
+                    <label><input type="radio" name="q4" value="3"> Rarely</label>
+                    <label><input type="radio" name="q4" value="4"> Never</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>5. Do you feel tired during the day?</label>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="1"> Always</label>
+                    <label><input type="radio" name="q5" value="2"> Frequently</label>
+                    <label><input type="radio" name="q5" value="3"> Rarely</label>
+                    <label><input type="radio" name="q5" value="4"> Never</label>
+                </div>
+            </div>
+
+            <!-- Questions 6 to 15 -->
+            <!-- Add similar structure for each of these questions -->
+            <!-- Example -->
+
+
+            <div class="question">
+                <label>6. Do you consume caffeine close to bedtime?</label>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="1"> Always</label>
+                    <label><input type="radio" name="q6" value="2"> Frequently</label>
+                    <label><input type="radio" name="q6" value="3"> Rarely</label>
+                    <label><input type="radio" name="q6" value="4"> Never</label>
+                </div>
+            </div>
+
+            <!-- ... Include remaining questions till q15 -->
+           <div class="question">
+    <label>7. Do you have difficulty falling asleep?</label>
+    <div class="options">
+        <label><input type="radio" name="q7" value="1"> Always</label>
+        <label><input type="radio" name="q7" value="2"> Frequently</label>
+        <label><input type="radio" name="q7" value="3"> Rarely</label>
+        <label><input type="radio" name="q7" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>8. Do you wake up earlier than desired?</label>
+    <div class="options">
+        <label><input type="radio" name="q8" value="1"> Always</label>
+        <label><input type="radio" name="q8" value="2"> Frequently</label>
+        <label><input type="radio" name="q8" value="3"> Rarely</label>
+        <label><input type="radio" name="q8" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>9. Do you feel anxious or stressed before sleeping?</label>
+    <div class="options">
+        <label><input type="radio" name="q9" value="1"> Always</label>
+        <label><input type="radio" name="q9" value="2"> Frequently</label>
+        <label><input type="radio" name="q9" value="3"> Rarely</label>
+        <label><input type="radio" name="q9" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>10. Do you feel your sleep is disrupted by noise?</label>
+    <div class="options">
+        <label><input type="radio" name="q10" value="1"> Always</label>
+        <label><input type="radio" name="q10" value="2"> Frequently</label>
+        <label><input type="radio" name="q10" value="3"> Rarely</label>
+        <label><input type="radio" name="q10" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>11. Do you experience nightmares or vivid dreams?</label>
+    <div class="options">
+        <label><input type="radio" name="q11" value="1"> Always</label>
+        <label><input type="radio" name="q11" value="2"> Frequently</label>
+        <label><input type="radio" name="q11" value="3"> Rarely</label>
+        <label><input type="radio" name="q11" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>12. Do you fall asleep unintentionally during the day?</label>
+    <div class="options">
+        <label><input type="radio" name="q12" value="1"> Always</label>
+        <label><input type="radio" name="q12" value="2"> Frequently</label>
+        <label><input type="radio" name="q12" value="3"> Rarely</label>
+        <label><input type="radio" name="q12" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>13. Do you feel restless or move frequently while sleeping?</label>
+    <div class="options">
+        <label><input type="radio" name="q13" value="1"> Always</label>
+        <label><input type="radio" name="q13" value="2"> Frequently</label>
+        <label><input type="radio" name="q13" value="3"> Rarely</label>
+        <label><input type="radio" name="q13" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>14. Do you experience difficulty concentrating during the day?</label>
+    <div class="options">
+        <label><input type="radio" name="q14" value="1"> Always</label>
+        <label><input type="radio" name="q14" value="2"> Frequently</label>
+        <label><input type="radio" name="q14" value="3"> Rarely</label>
+        <label><input type="radio" name="q14" value="4"> Never</label>
+    </div>
+</div>
+
+<div class="question">
+    <label>15. Do you rely on sleep aids or medications to sleep?</label>
+    <div class="options">
+        <label><input type="radio" name="q15" value="1"> Always</label>
+        <label><input type="radio" name="q15" value="2"> Frequently</label>
+        <label><input type="radio" name="q15" value="3"> Rarely</label>
+        <label><input type="radio" name="q15" value="4"> Never</label>
+    </div>
+</div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="results">
+        <h2 id="resultStage">Your Sleep Disorder Stage</h2>
+        <p id="resultDescription"></p>
+        <div class="suggestions">
+            <h3>Suggestions</h3>
+            <ul id="suggestionsList"></ul>
+        </div>
+        <button id="homeButton">Back to Home</button>
+    </div>
+
+    <script>
+        // Handle form submission
+        const form = document.getElementById("questionForm");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Calculate score
+            let score = 0;
+            const formData = new FormData(form);
+            for (let value of formData.values()) {
+                score += parseInt(value);
+            }
+
+            // Determine stage and suggestions
+            let stage = "", description = "", suggestions = [];
+            if (score <= 30) {
+                stage = "Mild Sleep Issues";
+                description = "Your sleep is slightly disturbed, but manageable with minor adjustments.";
+                suggestions = [
+                    "Maintain a consistent sleep schedule.",
+                    "Avoid caffeine in the evening.",
+                    "Create a calm sleep environment."
+                ];
+            } else if (score <= 45) {
+                stage = "Moderate Sleep Disorder";
+                description = "Your sleep is moderately affected, requiring some focused improvements.";
+                suggestions = [
+                    "Limit screen time before bed.",
+                    "Practice relaxation techniques like meditation.",
+                    "Reduce noise and light disturbances."
+                ];
+            } else {
+                stage = "Severe Sleep Disorder";
+                description = "Your sleep is significantly impacted. Professional help is recommended.";
+                suggestions = [
+                    "Consult a sleep specialist.",
+                    "Consider a sleep study for proper diagnosis.",
+                    "Avoid alcohol and heavy meals before sleep."
+                ];
+            }
+
+            // Update results section
+            document.getElementById("resultStage").textContent = stage;
+            document.getElementById("resultDescription").textContent = description;
+
+            const suggestionsList = document.getElementById("suggestionsList");
+            suggestionsList.innerHTML = "";
+            suggestions.forEach(suggestion => {
+                const li = document.createElement("li");
+                li.textContent = suggestion;
+                suggestionsList.appendChild(li);
+            });
+
+            // Show results with transition
+            document.getElementById("questionnaire").style.display = "none";
+            document.getElementById("results").style.display = "block";
+        });
+
+        // Handle back to home button
+        document.getElementById("homeButton").addEventListener("click", function () {
+            // Reset the form and results
+            form.reset();
+            document.getElementById("questionnaire").style.display = "block";
+            document.getElementById("results").style.display = "none";
+        });
+    </script>
+</body>
+
+</html>
